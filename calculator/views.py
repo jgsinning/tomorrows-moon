@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from calculator.astro import *
+import math
 
 # Create your views here.
 
@@ -23,10 +25,18 @@ def calculation(request):
         msg = "Input day must be an integer or floating-point number"
         return render(request, "error.html", {"result": msg})
 
+    if day < 1 or day >= 32:
+        msg = "Input day must be in the range [1.0, 32.0)"
+        return render(request, "error.html", {"result": msg})
+
     try:
         month = int(input_month)
     except ValueError:
         msg = "Input month must be an integer"
+        return render(request, "error.html", {"result": msg})
+
+    if month < 1 or month > 12:
+        msg = "Input month must be in the range [1, 12]"
         return render(request, "error.html", {"result": msg})
 
     try:
@@ -35,21 +45,63 @@ def calculation(request):
         msg = "Input year must be an integer"
         return render(request, "error.html", {"result": msg})
 
+    if year < 1900:
+        msg = "Input year must be at least 1900"
+        return render(request, "error.html", {"result": msg})
+
     try:
         latitude = int(input_latitude)
     except ValueError:
         msg = "Input latitude must be a floating-point number"
         return render(request, "error.html", {"result": msg})
 
+    if abs(latitude) > 90:
+        msg = "Input latitude must be in the range [-90.0, 90.0]"
+        return render(request, "error.html", {"result": msg})
+
     try:
         timezone = int(input_timezone)
     except ValueError:
-        msg = "Input month must be an integer or floating-point number"
+        msg = "Input timezone must be an integer or floating-point number"
+        return render(request, "error.html", {"result": msg})
+
+    if abs(timezone) > 12:
+        msg = "Input timezone must be in the range [-12.0, 12.0]"
         return render(request, "error.html", {"result": msg})
 
     # passed defensive checks
     # now do the actual calculations
 
-    # calculations here
+    if day - int(day) == 0.0:
+        day = int(day)
+
+    moon_phase = str_moon_phase(day, month, year)
+    illumination = int(1000 * calc_illumination(day, month, year) + 0.5) / 100.0
+    julian_date = calc_jd(day, month, year)
+    right_ascension, declination = calc_moon_pos(julian_date)
+    hour_angle = calc_ha(declination, 0, latitude)
+    local_sidereal_time = calc_lst(hour_angle, right_ascension)
+    local_time = calc_local_time(local_sidereal_time)
+    rise_hour, rise_minute = convert_time_zone(local_time, timezone)
+    eclipse = check_eclipse(day, month, year)
+
+    moon_img = get_moon_img(day, month, year)
+    system_img = get_system_img(day, month, year)
 
     # render the results page with numbers and images
+    return render(request, "result.html", {
+        "day": day,
+        "month": month,
+        "year": year,
+        "moon_phase": moon_phase,
+        "illumination": illumination,
+        "julian_date": julian_date,
+        "right_ascension": right_ascension,
+        "declination": declination,
+        "hour_angle": hour_angle,
+        "rise_hour": rise_hour,
+        "rise_minute": rise_minute,
+        "eclipse": eclipse,
+        "moon_img": moon_img,
+        "system_img": system_img
+    })
