@@ -1,0 +1,65 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+    <h1 id="toc_0">References</h1>
+
+    <p>Updated 25 August 2021</p>
+
+    <hr>
+
+    <p>Burnett, K. (1998, May 27). <em>Converting RA and DEC to Alt and AZ.</em> Approximate Astronomical Positions. http://www.stargazing.net/kepler/altaz.html. </p>
+
+    <p>Chakraborty, A., &amp; Feigelson, E. D. (2019, May 2). astrolibR Version (0.1). <em>rdrr.io.</em> https://rdrr.io/cran/astrolibR/. </p>
+
+    <p><em>Finding the Moon&#39;s Phase Angle.</em> Canadian Satellite Tracking and Orbit Research. (2010, December 6). http://www.castor2.ca/16<em>Calc/01</em>Moon/03_Phase/index.html. </p>
+
+    <p>Hunter, J. D. (2021, August 13). Matplotlib Version (3.4.3). <em>Matplotlib: A 2D Graphics Environment.</em> https://matplotlib.org/stable/index.html. </p>
+
+    <p>Meeus, J. (1998). <em>Astronomical Algorithms: Second Edition.</em> Willmann-Bell. </p>
+
+    <hr>
+
+    <h2 id="toc_1">Specific references by functions in calculator/astro.py</h2>
+
+    <h3 id="toc_2">calc_jd and calc_date</h3>
+
+    <p>Meeus 1998, Chapter 7</p>
+
+    <h3 id="toc_3">nutate</h3>
+
+    <p>Chakraborty and Feigelson 2019, R/nutate.R</p>
+
+    <p>This function was written in R in astrolibR, so I adapted it for use in Python. The method used in the original function is found in Meeus 1998, Chapter 22.</p>
+
+    <h3 id="toc_4">calc_moon_pos</h3>
+
+    <p>Chakraborty and Feigelson 2019, R/moonpos.R</p>
+
+    <p>This is another function from astrolibR that I adapted to Python. The method used in the original function is found in Meeus 1998, Chapter 47.</p>
+
+    <h3 id="toc_5">calc_ha, calc_lst</h3>
+
+    <p>Burnett 1998</p>
+
+    <h3 id="toc_6">calc_moon_phase and str_moon_phase</h3>
+
+    <p>Meeus 1998, Chapter 49</p>
+
+    <h3 id="toc_7">check_eclipse</h3>
+
+    <p>Meeus 1998, Chapter 54</p>
+
+    <h3 id="toc_8">calc_illumination</h3>
+
+    <p>Meeus 1998, Chapter 48</p>
+
+    <h3 id="toc_9">calc_phase_angle</h3>
+
+    <p>&quot;Finding the Moon&#39;s Phase Angle&quot; 2010</p>
+
+    <h3 id="toc_10">get_moon_img and get_system_img</h3>
+
+    <p>Hunter 2021, Matplotlib Version 3.4.3</p>
+
+{% endblock %}

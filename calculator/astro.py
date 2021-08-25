@@ -5,10 +5,6 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Ellipse, Rectangle
 from io import StringIO
 
-# https://rdrr.io/cran/astrolibR/src/R/moonpos.R
-# http://www.stargazing.net/kepler/altaz.html
-# http://www.castor2.ca/16_Calc/01_Moon/03_Phase/index.html
-
 
 # Calculate Julian Date given day, month, year
 def calc_jd(day, month, year):
@@ -178,9 +174,9 @@ def nutate(jd):
     # find omega via dot product of t and coeff5
     omega = reduce_angle(dot_product(coeff5, t) * rd, radians=True)
 
-    # initialize longitude, oblique
+    # initialize longitude, obliquity
     long = 0
-    oblique = 0
+    obliquity = 0
 
     # find arg
     arg = dot_product(d_lng, d) + dot_product(m_lng, m) + dot_product(mp_lng, mprime) + dot_product(f_lng, f) \
@@ -189,9 +185,9 @@ def nutate(jd):
     cosarg = t * math.cos(arg)
 
     long = 0.0001 * nutate_list_helper(sdelt, sin_lng, t) * sinarg
-    oblique = 0.0001 * nutate_list_helper(cdelt, cos_lng, t) * cosarg
+    obliquity = 0.0001 * nutate_list_helper(cdelt, cos_lng, t) * cosarg
 
-    return long, oblique
+    return long, obliquity
 
 
 # Calculate Moon's right ascension and declination given Julian Date
@@ -440,6 +436,7 @@ def check_eclipse(day, month, year):
     eclipse_type = "No eclipse"
     iterations = 0
 
+    # break up day into 10 fractions
     while iterations < 10:
         # get k from date + variation in day
         k = calc_moon_phase(day+iterations/10, month, year)
@@ -486,6 +483,13 @@ def check_eclipse(day, month, year):
 def calc_illumination(day, month, year):
     k = calc_moon_phase(day, month, year)
     return 0.5 - math.cos(2 * math.pi * (k - int(k))) / 2
+
+
+# Get phase angle from day, month, year
+def calc_phase_angle(day, month, year):
+    k = calc_moon_phase(day, month, year)
+    phase = k - int(k)
+    return math.degrees(math.acos(2 * phase - 1))
 
 
 # Get illuminated Moon image

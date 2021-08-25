@@ -1,0 +1,47 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+    <h1 id="toc_0">Notes on accuracy</h1>
+
+    <h3 id="toc_1">If a function is not listed below, consider it accurate.</h3>
+
+    <hr>
+
+    <h3 id="toc_2">nutate</h3>
+
+    <p>Longitude and obliquity are accurate within 0&quot;.01 and after 1,000 years</p>
+
+    <h3 id="toc_3">calc_moon_pos</h3>
+
+    <p>The algorithm this was adapted from in Chapter 47 of Meeus 1998 has an accuracy of 10&quot; in the Moon&#39;s longitude and 4&quot; in the Moon&#39;s latitude. In this adaptation, right ascension and declination are calculated instead, and they were intermediate products in finding the Moon&#39;s longitude and latitude.  As a result, we can reasonably assume neither the right ascension nor the declination will inaccurate by a degree greater than 10&quot;.</p>
+
+    <h3 id="toc_4">calc_ha and calc_lst</h3>
+
+    <p>The formulae used in Burnett 1998 make logical sense, but that does not necessarily mean they are accurate. Burnett did not provide accuracy figures for the relationships.</p>
+
+    <h3 id="toc_5">calc_moon_phase</h3>
+
+    <p>The moon phase returned will be accurate within a few minutes of local time, according to Meeus 1998, Chapter 49.</p>
+
+    <h3 id="toc_6">check_eclipse</h3>
+
+    <p>From my testing, a given date with a solar eclipse has a good (&gt;90%) chance of being detected. A given date with a lunar eclipse is less predictable, with only 30-50% of lunar eclipse dates being detected in testing. </p>
+
+    <h3 id="toc_7">calc_illumination</h3>
+
+    <p>According to Chapter 48 of Meeus 1998, the illuminated percentage will always be accurate within 0.14 percentage points.</p>
+
+    <h3 id="toc_8">calc_phase_angle</h3>
+
+    <p>The formula provided by CASTOR in &quot;Finding the Moon&#39;s Phase Angle&quot; is believed to accurately reflect the relationship between progress in the lunar cycle and phase angle.</p>
+
+    <h3 id="toc_9">get_moon_img</h3>
+
+    <p>The image returned by this function is not to scale as the Moon&#39;s phase function is neglected, meaning the actual appearance of the Moon will have a smoother visual transition between the illuminated and dark potions.</p>
+
+    <h3 id="toc_10">get_system_img</h3>
+
+    <p>The following are not to scale: the sizes of the Sun, Earth, Moon, the radii of the Earth&#39;s orbit around the Sun and the Moon&#39;s orbit around the Earth, and the shapes of the orbits themselves (they should be elliptical). The relative positions of all three bodies is accurate.</p>
+
+{% endblock %}

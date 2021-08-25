@@ -8,6 +8,14 @@ def index(request):
     return render(request, "index.html")
 
 
+def references(request):
+    return render(request, "references.html")
+
+
+def accuracy(request):
+    return render(request, "accuracy.html")
+
+
 def calculation(request):
     # get post requests from index.html
     input_day = request.POST['input_day']
@@ -76,6 +84,7 @@ def calculation(request):
 
     moon_phase = str_moon_phase(day, month, year)
     illumination = calc_illumination(day, month, year)
+    phase_angle = calc_phase_angle(day, month, year)
     julian_date = calc_jd(day, month, year)
     right_ascension, declination = calc_moon_pos(julian_date)
     hour_angle = calc_ha(declination, 0, latitude)
@@ -89,6 +98,7 @@ def calculation(request):
 
     # format results
     illumination = int(1000 * illumination + 0.5) / 10.0
+    phase_angle = int(1000 * phase_angle + 0.5) / 1000.0
     right_ascension = int(1000 * right_ascension + 0.5) / 1000.0
     declination = int(1000 * declination + 0.5) / 1000.0
     hour_angle = int(1000 * hour_angle + 0.5) / 1000.0
@@ -106,6 +116,7 @@ def calculation(request):
         "year": year,
         "moon_phase": moon_phase,
         "illumination": illumination,
+        "phase_angle": phase_angle,
         "julian_date": julian_date,
         "right_ascension": right_ascension,
         "declination": declination,
