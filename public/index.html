@@ -2,14 +2,44 @@
 
 {% block content %}
 
+    <style>
+        form {
+            display: table;
+        }
+        .container {
+            display: table-row;
+        }
+        label {
+            display: table-cell;
+        }
+        input {
+            display: table-cell;
+        }
+    </style>
+
     <h1>Tomorrow's Moon Calculator</h1>
     <form action="calc" method="POST">
         {% csrf_token %}
-        Enter day of month (integer or floating-point): <input type="text" name="input_day"><br><br>
-        Enter month (integer): <input type="text" name="input_month"><br><br>
-        Enter year (integer): <input type="text" name="input_year"><br><br>
-        Enter latitude (degrees, floating-point): <input type="text" name="input_latitude"><br><br>
-        Enter time zone (GMT/UTC +/-, integer or floating-point): <input type="text" name="input_timezone"><br><br>
+        <div class="container">
+            <label for="a">Enter day of month (integer or floating-point): </label>
+            <input id="a" type="text" name="input_day"><br><br>
+        </div>
+        <div class="container">
+            <label for="b">Enter month (integer): </label>
+            <input id="b" type="text" name="input_month"><br><br>
+        </div>
+        <div class="container">
+            <label for="c">Enter year (integer): </label>
+            <input id="c" type="text" name="input_year"><br><br>
+        </div>
+        <div class="container">
+            <label for="d">Enter latitude (degrees, floating-point): </label>
+            <input id="d" type="text" name="input_latitude"><br><br>
+        </div>
+        <div class="container">
+            <label for="e">Enter time zone (GMT/UTC +/-, integer or floating-point): </label>
+            <input id="e" type="text" name="input_timezone"><br><br>
+        </div>
         <input type="submit">
     </form>
 

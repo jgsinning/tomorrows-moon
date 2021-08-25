@@ -1,4 +1,6 @@
 import math
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Ellipse, Rectangle
 from io import StringIO
@@ -493,8 +495,6 @@ def get_moon_img(day, month, year):
 
     # get illumination from phase
     illumination = calc_illumination(day, month, year)
-    print(phase)
-    print(illumination)
 
     # setup matplotlib plot
     fig = plt.figure()
@@ -551,7 +551,7 @@ def get_system_img(day, month, year):
     ax.add_patch(sun)
 
     # add earth's orbit
-    earth_orbit_radius = 0.35
+    earth_orbit_radius = 0.32
     earth_orbit = Circle(xy=(0.5, 0.5), radius=earth_orbit_radius, edgecolor='k', fill=False)
     ax.add_patch(earth_orbit)
 
@@ -564,7 +564,7 @@ def get_system_img(day, month, year):
     ax.add_patch(earth)
 
     # add moon's orbit
-    moon_orbit_radius = 0.15
+    moon_orbit_radius = 0.12
     moon_orbit = Circle(xy=(earth_x, earth_y), radius=moon_orbit_radius, edgecolor='k', fill=False)
     ax.add_patch(moon_orbit)
 

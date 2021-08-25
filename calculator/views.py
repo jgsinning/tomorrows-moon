@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from calculator.astro import *
-import math
 
 # Create your views here.
 
@@ -50,7 +49,7 @@ def calculation(request):
         return render(request, "error.html", {"result": msg})
 
     try:
-        latitude = int(input_latitude)
+        latitude = float(input_latitude)
     except ValueError:
         msg = "Input latitude must be a floating-point number"
         return render(request, "error.html", {"result": msg})
@@ -76,7 +75,7 @@ def calculation(request):
         day = int(day)
 
     moon_phase = str_moon_phase(day, month, year)
-    illumination = int(1000 * calc_illumination(day, month, year) + 0.5) / 100.0
+    illumination = calc_illumination(day, month, year)
     julian_date = calc_jd(day, month, year)
     right_ascension, declination = calc_moon_pos(julian_date)
     hour_angle = calc_ha(declination, 0, latitude)
@@ -87,6 +86,18 @@ def calculation(request):
 
     moon_img = get_moon_img(day, month, year)
     system_img = get_system_img(day, month, year)
+
+    # format results
+    illumination = int(1000 * illumination + 0.5) / 10.0
+    right_ascension = int(1000 * right_ascension + 0.5) / 1000.0
+    declination = int(1000 * declination + 0.5) / 1000.0
+    hour_angle = int(1000 * hour_angle + 0.5) / 1000.0
+
+    if rise_hour < 10:
+        rise_hour = f"0{rise_hour}"
+
+    if rise_minute < 10:
+        rise_minute = f"0{rise_minute}"
 
     # render the results page with numbers and images
     return render(request, "result.html", {
