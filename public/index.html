@@ -1,0 +1,16 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+    <h1>Addition</h1>
+    <form action="calc" method="POST">
+        {% csrf_token %}
+        Enter day of month (integer or floating-point): <input type="text" name="input_day"><br><br>
+        Enter month (integer): <input type="text" name="input_month"><br><br>
+        Enter year (integer): <input type="text" name="input_year"><br><br>
+        Enter latitude (degrees, floating-point): <input type="text" name="input_latitude"><br><br>
+        Enter time zone (GMT/UTC +/-, integer or floating-point): <input type="text" name="input_timezone"><br><br>
+        <input type="submit">
+    </form>
+
+{% endblock %}
