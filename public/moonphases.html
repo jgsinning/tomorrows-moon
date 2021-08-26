@@ -1,0 +1,151 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+    <style>
+        table {
+      padding: 0;border-collapse: collapse; }
+      table tr {
+        border-top: 1px solid #cccccc;
+        background-color: white;
+        margin: 0;
+        padding: 0; }
+        table tr:nth-child(2n) {
+          background-color: #f8f8f8; }
+        table tr th {
+          font-weight: bold;
+          border: 1px solid #cccccc;
+          margin: 0;
+          padding: 6px 13px; }
+        table tr td {
+          border: 1px solid #cccccc;
+          margin: 0;
+          padding: 6px 13px; }
+        table tr th :first-child, table tr td :first-child {
+          margin-top: 0; }
+        table tr th :last-child, table tr td :last-child {
+          margin-bottom: 0; }
+    </style>
+
+    <h1 id="toc_0">How to calculate Moon phases</h1>
+
+    <h2 id="toc_1">Given: day, month, year</h2>
+
+    <ol>
+    <li>Convert the entire date to decimal years. Using the day and month, find the fraction of passed days over 365.25 (one year) and add to the year value.</li>
+    <li>Find the value of k using this equation:
+
+    <ul>
+    <li>k = (years - 2000) * 12.3685 - 0.25</li>
+    <li>Note: here, k is offset by a quarter cycle (0.25) for better accuracy</li>
+    </ul></li>
+    <li>Extract the decimal from k, keeping note if k was positive or negative.</li>
+    <li>Use the below tables to determine the phase.</li>
+    </ol>
+
+    <p>If k is <em>positive</em>, refer to the following table:</p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>Fraction</th>
+    <th>Phase</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+    <td>[0, 0.017)</td>
+    <td>New Moon</td>
+    </tr>
+    <tr>
+    <td>[0.017, 0.233)</td>
+    <td>Waxing Crescent</td>
+    </tr>
+    <tr>
+    <td>[0.233, 0.267)</td>
+    <td>First Quarter</td>
+    </tr>
+    <tr>
+    <td>[0.267, 0.483)</td>
+    <td>Waxing Gibbous</td>
+    </tr>
+    <tr>
+    <td>[0.483, 0.517)</td>
+    <td>Full Moon</td>
+    </tr>
+    <tr>
+    <td>[0.517, 0.733)</td>
+    <td>Waning Gibbous</td>
+    </tr>
+    <tr>
+    <td>[0.733, 0.767)</td>
+    <td>Last Quarter</td>
+    </tr>
+    <tr>
+    <td>[0.767, 0.983)</td>
+    <td>Waning Crescent</td>
+    </tr>
+    <tr>
+    <td>[0.983, 1)</td>
+    <td>New Moon</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <p>If k is <em>negative</em>, refer to the following table:</p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>Fraction</th>
+    <th>Phase</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+    <td>[0, 0.017)</td>
+    <td>New Moon</td>
+    </tr>
+    <tr>
+    <td>[0.017, 0.233)</td>
+    <td>Waning Crescent</td>
+    </tr>
+    <tr>
+    <td>[0.233, 0.267)</td>
+    <td>Last Quarter</td>
+    </tr>
+    <tr>
+    <td>[0.267, 0.483)</td>
+    <td>Waning Gibbous</td>
+    </tr>
+    <tr>
+    <td>[0.483, 0.517)</td>
+    <td>Full Moon</td>
+    </tr>
+    <tr>
+    <td>[0.517, 0.733)</td>
+    <td>Waxing Gibbous</td>
+    </tr>
+    <tr>
+    <td>[0.733, 0.767)</td>
+    <td>First Quarter</td>
+    </tr>
+    <tr>
+    <td>[0.767, 0.983)</td>
+    <td>Waxing Crescent</td>
+    </tr>
+    <tr>
+    <td>[0.983, 1)</td>
+    <td>New Moon</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <p>Note: 0.017 ~= 0.5 / 29.53059, where 29.53059 is the average length of a lunar cycle. The rounded value will provide phases accurate to the day, while that same value with 7 significant figures will be accurate within a few minutes. If you seek more precision, still consider using 0.5 as the numerator to allow for uncertainty of half of a day in either direction. New Moons always occur around 0 and Full Moons around 0.5, with the quarters occurring around 0.25 and 0.75 depending on the value of k.</p>
+
+    <h3>For more information or even more precision, refer to Chapter 49 of <em>Astronomical Algorithms</em>, Meeus 1998.</h3>
+
+
+{% endblock %}

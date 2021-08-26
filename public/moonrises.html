@@ -1,0 +1,19 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+    <h1 id="toc_0">How to calculate Moon rise times</h1>
+
+    <h3 id="toc_1">This is only an overview of the methodology. For detailed calculations, refer to the source code or to Chapter 47 of <em>Astronomical Algorithms</em>, Meeus 1998.</h3>
+
+    <h2 id="toc_2">Given: day, month, year, latitude</h2>
+
+    <ol>
+    <li>Find the Julian Date for that day, month, and year.</li>
+    <li>Find the right ascension and declination of the Moon for that Julian Date. This will likely require the date to be nutated (finding the longitude and obliquity).</li>
+    <li>Using the found declination, given latitude, and an altitude of 0, calculate the hour angle at Moon rise.</li>
+    <li>Using the hour angle and right ascension, find the time of Moon rise in local sidereal time.</li>
+    <li>Convert local sidereal time to local time.</li>
+    </ol>
+
+{% endblock %}
