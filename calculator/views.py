@@ -16,6 +16,14 @@ def accuracy(request):
     return render(request, "accuracy.html")
 
 
+def moonphases(request):
+    return render(request, "moonphases.html")
+
+
+def moonrises(request):
+    return render(request, "moonrises.html")
+
+
 def calculation(request):
     # get post requests from index.html
     input_day = request.POST['input_day']
@@ -62,8 +70,8 @@ def calculation(request):
         msg = "Input latitude must be a floating-point number"
         return render(request, "error.html", {"result": msg})
 
-    if abs(latitude) > 90:
-        msg = "Input latitude must be in the range [-90.0, 90.0]"
+    if abs(latitude) >= 83.5:
+        msg = "Input latitude must be in the range (-83.5, 83.5)"
         return render(request, "error.html", {"result": msg})
 
     try:
@@ -96,6 +104,10 @@ def calculation(request):
     moon_img = get_moon_img(day, month, year)
     system_img = get_system_img(day, month, year)
 
+    end_message = ""
+    if moon_phase == "Full Moon":
+        end_message = "Watch out: you might see a werewolf drinking a pina colada at Trader Vic's"
+
     # format results
     illumination = int(1000 * illumination + 0.5) / 10.0
     phase_angle = int(1000 * phase_angle + 0.5) / 1000.0
@@ -125,5 +137,6 @@ def calculation(request):
         "rise_minute": rise_minute,
         "eclipse": eclipse,
         "moon_img": moon_img,
-        "system_img": system_img
+        "system_img": system_img,
+        "end_message": end_message
     })

@@ -8,9 +8,23 @@
 
     <hr>
 
+    <h2>Known bug(s)</h2>
+
+    <h3>Latitude domain</h3>
+
+    <p>The domain allowed on latitude in the calculator is (-83.5, 83.5). This is to prevent potential domain errors stemming from an arccosine function that could crash the app.</p>
+
+    <h3 id="toc_6">check_eclipse</h3>
+
+    <p>From my testing, a given date with a solar eclipse has a good (&gt;80%) chance of being detected. A given date with a lunar eclipse is less predictable, with only 30-50% of lunar eclipse dates detected in testing. </p>
+
+    <hr>
+
+    <h2>Functions working as intended</h2>
+
     <h3 id="toc_2">nutate</h3>
 
-    <p>Longitude and obliquity are accurate within 0&quot;.01 and after 1,000 years</p>
+    <p>Longitude and obliquity are accurate within 0&quot;.01 and after 1,000 years, according to Meeus 1998, Chapter 22.</p>
 
     <h3 id="toc_3">calc_moon_pos</h3>
 
@@ -23,10 +37,6 @@
     <h3 id="toc_5">calc_moon_phase</h3>
 
     <p>The moon phase returned will be accurate within a few minutes of local time, according to Meeus 1998, Chapter 49.</p>
-
-    <h3 id="toc_6">check_eclipse</h3>
-
-    <p>From my testing, a given date with a solar eclipse has a good (&gt;90%) chance of being detected. A given date with a lunar eclipse is less predictable, with only 30-50% of lunar eclipse dates being detected in testing. </p>
 
     <h3 id="toc_7">calc_illumination</h3>
 

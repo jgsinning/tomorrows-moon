@@ -8,4 +8,6 @@ urlpatterns = [
     path('calc', views.calculation, name='calc'),
     url(r'references', views.references, name='references'),
     url(r'accuracy', views.accuracy, name='accuracy'),
+    url(r'moonphases', views.moonphases, name='moonphases'),
+    url(r'moonrises', views.moonrises, name='moonrises'),
 ]

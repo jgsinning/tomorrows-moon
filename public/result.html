@@ -11,11 +11,13 @@
     <h3>Phase angle: {{ phase_angle }}&#176;</h3>
     <h3>Right ascension: {{ right_ascension }}&#176;</h3>
     <h3>Declination: {{ declination }}&#176;</h3>
-    <h3>Hour angle (at moon rise): {{ hour_angle }}&#176;</h3>
-    <h3>Estimated moon rise time: {{ rise_hour }}:{{ rise_minute }}</h3>
+    <h3>Hour angle (at Moon rise): {{ hour_angle }}&#176;</h3>
+    <h3>Estimated Moon rise time: {{ rise_hour }}:{{ rise_minute }}</h3>
     <h3>Eclipse likelihood: {{ eclipse }}</h3>
 
     {{ moon_img|safe }}
     {{ system_img|safe }}
+
+    <p>{{ end_message }}</p>
 
 {% endblock %}

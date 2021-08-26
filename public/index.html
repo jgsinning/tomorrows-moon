@@ -17,7 +17,7 @@
         }
     </style>
 
-    <h1>Tomorrow's Moon Calculator</h1>
+    <h1>Moon Calculator</h1>
     <form action="calc" method="POST">
         {% csrf_token %}
         <div class="container">
@@ -45,7 +45,11 @@
 
     <br>
     <a href="/public/accuracy.html"><h2>Accuracy</h2></a>
+    <a href="/public/moonphases.html"><h2>How to calculate Moon phases</h2></a>
+    <a href="/public/moonrises.html"><h2>How to calculate Moon rise times (overview)</h2></a>
     <a href="/public/references.html"><h2>References</h2></a>
+
+    <p>Jason Sinning, Dartmouth College ASTR1, 25 August 2021</p>
 
 
 {% endblock %}
